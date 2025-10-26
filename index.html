@@ -6,41 +6,43 @@
   <title>Document</title>
 </head>
 <body>
-  <button class="send-message">Установить WS соединение</button>
+  <button class="send-req-btn">Отправить команду</button>
   <p>Статус: <p class="status-text"></p></p>
 </body>
 <script>
-  const sendBtn = document.querySelector('.send-message');
+  const initWSBtn = document.querySelector('.init-ws-btn');
+  const sendReqBtn = document.querySelector('.send-req-btn');
   const statusText = document.querySelector('.status-text');
 
 
 
-  function initWS() {
-    statusText.textContent = "Инициализация WS соединеня...";
-
-    const ws = new WebSocket('ws://81.200.146.157:8000/ws/chips');
-
-    ws.onopen = () => {
-      statusText.textContent = "WS соединение установленно.";
+  function sendReq() {
+    const url = "http://81.200.146.157:8000/api/command";
+    const data = {
+      chipID: "ESP32-LGD67cdvznCawTzbdsxF",
+      command: "chip-light-off"
     };
 
-    ws.onmessage = (event) => {
-      statusText.textContent = event.data;
-    };
-
-    ws.onerror = (error) => {
-      statusText.textContent = error;
-    };
-
-    ws.onclose = () => {
-      statusText.textContent = "Соединение закрыто.";
-    };
+    fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(data)
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+      console.log(response);
+    })
+    .catch(error => {
+      console.error("Ошибка запроса:", error);
+    });
   }
 
-
-  
-  sendBtn.addEventListener('click', () => {
-    initWS();
+  sendReqBtn.addEventListener('click', () => {
+    sendReq();
   });
 </script>
 </html>

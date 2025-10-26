@@ -3,17 +3,23 @@
 #include <HTTPClient.h>
 #include <ArduinoJson.h>
 #include <ArduinoWebSockets.h>
+#include <string>
 
 
 using namespace websockets;
 WebsocketsClient client;
 
+String chipID = "ESP32-LGD67cdvznCawTzbdsxF";
+
 const char* ethSsid = "TP-Link_F9BC_EXT";
 const char* ethPassword = "54641259";
+
+String urlWS = "ws://81.200.146.157:8000/ws/chips?chipid=" + chipID;
 
 const int ledPin = 2;
 
 bool isConnectWiFi = false;
+bool isWSConnected = false;
 
 
 
@@ -49,28 +55,54 @@ void connetctToWiFi() { //Подключение к Wi-Fi
 
 }
 
-void initWS() {
+bool executeCommand(String command) { //Выполнение команд
+  if (command == "chip-light-on") {
+    digitalWrite(ledPin, HIGH);
+    return true;
+  }
+
+  if (command == "chip-light-off") {
+    digitalWrite(ledPin, LOW);
+    return true;
+  }
+
+  return false;
+}
+
+void initWS() { //Иницифлизация WebSocket
 
   if (!isConnectWiFi || WiFi.status() != WL_CONNECTED) {
     Serial.println("WiFi isn't active.");
     return;
   }
 
-  const char* wsUrl = "ws://81.200.146.157:8000/ws/chips";
-
   client.onMessage([](WebsocketsMessage message) {
-    Serial.println(message.data());
+    DynamicJsonDocument doc(256);
+    DeserializationError error = deserializeJson(doc, message.data());
+
+    if (error) {
+      Serial.println("JSON parse error:");
+      return;
+    }
+
+    if (!executeCommand(doc["command"])) {
+      Serial.println("Command isn't found.");
+    } else {
+      Serial.println("Command is succesfully executed.");
+    }
   });
 
   client.onEvent([](WebsocketsEvent event, String data) {
     if (event == WebsocketsEvent::ConnectionOpened) {
+      isWSConnected = true;
       Serial.println("WS connection opened.");
     } else if (event == WebsocketsEvent::ConnectionClosed) {
+      isWSConnected = false;
       Serial.println("WS connection closed.");
     }
   });
 
-  if (client.connect(wsUrl)) {
+  if (client.connect(urlWS)) {
     Serial.println("WS is succesfylly conected.");
   } else {
     Serial.println("WS is failed connected.");
@@ -96,9 +128,10 @@ void setup() {
 
 void loop() {
 
-  if (!client.available()) {
+  if (!isWSConnected) {
     Serial.println("WS is closed.");
-    client.connect("ws://81.200.146.157:8000/ws/chips");
+    client.connect(urlWS);
+    delay(2000);
   }
 
   client.poll();

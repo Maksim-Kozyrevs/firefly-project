@@ -2,32 +2,37 @@ import { WebSocketServer } from "ws";
 
 
 
-export function initWS(httpServer) {
+export function initWS(httpServer, chipsWSMap) {
 
   try {
    const serverWS = new WebSocketServer({ noServer: true });
 
-    serverWS.on("connection", (ws) => {
-      console.log("Client connected.");
+    serverWS.on("connection", (ws, request, url) => {
+      const chipID = url.searchParams.get("chipid");
 
-      ws.send(JSON.stringify({
-        command: "Test",
-        data: "Succesfully response from server!"
-      }))
+      if (!chipID) {
+        ws.close(4001, "Not isset chipdID.");
+        return;
+      }
+
+      chipsWSMap.set(chipID, ws)
       
       ws.on("message", (data) => {
         console.log(data.toString());
       });
 
       ws.on("close", () => {
+        chipsWSMap.delete(chipID);
         console.log("Client disconnected.");
       });
     });
 
     httpServer.on("upgrade", (request, socket, head) => {
-      if (request.url == "/ws/chips") {
+      const reqUrl = new URL(request.url, `http://${request.headers.host}`);
+
+      if (reqUrl.pathname === "/ws/chips") {
         serverWS.handleUpgrade(request, socket, head, (ws) => {
-          serverWS.emit("connection", ws, request);
+          serverWS.emit("connection", ws, request, reqUrl);
         });
       } else {
         socket.destroy();
