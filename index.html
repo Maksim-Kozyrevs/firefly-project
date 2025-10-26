@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <button class="send-message">Установить WS соединение</button>
+  <p>Статус: <p class="status-text"></p></p>
+</body>
+<script>
+  const sendBtn = document.querySelector('.send-message');
+  const statusText = document.querySelector('.status-text');
+
+
+
+  function initWS() {
+    statusText.textContent = "Инициализация WS соединеня...";
+
+    const ws = new WebSocket('ws://localhost:8000');
+
+    ws.onopen = () => {
+      statusText.textContent = "WS соединение установленно.";
+    };
+
+    ws.onmessage = (event) => {
+      statusText.textContent = event.data;
+    };
+
+    ws.onerror = (error) => {
+      statusText.textContent = error;
+    };
+
+    ws.onclose = () => {
+      statusText.textContent = "Соединение закрыто.";
+    };
+  }
+
+
+  
+  sendBtn.addEventListener('click', () => {
+    initWS();
+  });
+</script>
+</html>

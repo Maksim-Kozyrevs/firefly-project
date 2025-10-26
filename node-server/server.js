@@ -1,20 +1,29 @@
-const express = require('express');
+import express from "express";
+import { createServer } from "http";
+
+import { initWS } from "./modules/init-ws.js";
+
+
+
 const server = express();
+const httpServer = createServer(server);
 
 
 
 function startServer() {
 
   try {
-      
-    server.use('/test', (req, res) => {
+    server.use("/test", (req, res) => {
       res.json({
         data: "Test is successful."
       });
     });
 
-    server.listen(8000, "0.0.0.0", () => {
-      console.log("Server is started.");
+    //Инициализация WS
+    initWS(httpServer);
+
+    httpServer.listen(8000, () => {
+      console.log("Server is starting.");
     });
 
   } catch (error) {

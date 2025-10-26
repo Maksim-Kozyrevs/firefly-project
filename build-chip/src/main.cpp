@@ -13,7 +13,8 @@ bool isConnectWiFi = false;
 
 
 
-struct apiResponse {  bool status;
+struct apiResponse {
+  bool status;
   int httpCode;
   String responseJSON;
 };
@@ -90,7 +91,7 @@ void setup() {
   connetctToWiFi();
 
   if (isConnectWiFi) {
-    apiResponse response = getRequest("http://192.168.0.127:8000/test");
+    apiResponse response = getRequest("http://81.200.146.157:8000/test");
 
     if (response.status) {
       Serial.println(response.responseJSON);
