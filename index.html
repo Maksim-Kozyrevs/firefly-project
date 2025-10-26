@@ -18,7 +18,7 @@
   function initWS() {
     statusText.textContent = "Инициализация WS соединеня...";
 
-    const ws = new WebSocket('ws://localhost:8000');
+    const ws = new WebSocket('ws://81.200.146.157:8000/ws/chips');
 
     ws.onopen = () => {
       statusText.textContent = "WS соединение установленно.";
