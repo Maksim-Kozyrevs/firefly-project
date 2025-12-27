@@ -1,0 +1,8 @@
+#Node Server
+/node-server/node_modules
+
+#Telegram App
+/telegram-app/node_modules
+
+#Mobile App
+/mobile-app
