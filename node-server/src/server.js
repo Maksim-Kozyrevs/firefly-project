@@ -1,5 +1,6 @@
 import express from "express";
 import { createServer } from "http";
+import cors from "cors";
 
 import { initWS } from "./ws/init-ws.js";
 

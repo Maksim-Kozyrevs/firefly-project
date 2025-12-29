@@ -1,7 +1,7 @@
 import express from 'express';
 
 //API
-import timeSheetRouter from "./timesheet/inedx.js";
+import timeSheetRouter from "./timesheet/index.js";
 import manageDevicesRouter from "./manage-devices/index.js";
 import testRouter from "./test/index.js";
 
