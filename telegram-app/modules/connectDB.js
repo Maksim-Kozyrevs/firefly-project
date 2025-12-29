@@ -5,10 +5,10 @@ import pkg from 'pg';
 const { Pool } = pkg;
 
 const pool = new Pool({
-    user: "server",
+    user: "fireflyproject",
     host: "localhost",
     database: "main",
-    password: "4F*CxbFunn16khu8bO6A",
+    password: "7zih8qFVCltQWmA*egti",
     port: 5432
 });
 

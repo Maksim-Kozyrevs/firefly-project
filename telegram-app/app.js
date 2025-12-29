@@ -8,7 +8,7 @@ import { sendMenuTemplate, sendTimesheetTemplate } from "./services/messageTempl
 
 
 const tgBotToken = "8248086356:AAFxuPlB-z4SLiYwb22y_KIb6y8fXwlRjf8";
-const commandApi = "http://81.200.146.157:8000/api/command";
+const commandApi = "https://ai-firefly.ru/api/command";
 
 
 

@@ -15,16 +15,16 @@
 
 
 //Данные платы
-String CHIP_ID = "ESP32-LGD67cdvznCawTzbdsxF";
+String CHIP_ID = "3547f5dc-bc55-497e-834b-88dab0b2cd09";
 
 //Данные WiFi
-const char* ETH_SSID = "realme C11 2021";
-const char* ETH_PASSWORD = "ai-firefly";
+const char* ETH_SSID = "TP-Link_F9BC_EXT";
+const char* ETH_PASSWORD = "54641259";
 
 //Компоненты WebSockets
 using namespace websockets;
 WebsocketsClient client;
-String urlWS = "ws://81.200.146.157:8000/ws/chips?chipid=" + CHIP_ID;
+String urlWS = "ws://109.68.214.90:8000/ws/chips?chipid=" + CHIP_ID;
 
 //Внешние компоненты
 const int pinPowerLed = 13;

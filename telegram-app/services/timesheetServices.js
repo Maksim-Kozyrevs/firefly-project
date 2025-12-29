@@ -7,7 +7,7 @@ import axios from "axios";
 export async function getTimesheet(tgUserName) {
 
   try{
-    const timesheet = await pool.query("SELECT timesheet FROM esp32_chips WHERE tg_user_names @> $1", [JSON.stringify([tgUserName])]);
+    const timesheet = await pool.query("SELECT timesheet FROM smart_devices WHERE tg_user_names @> $1", [JSON.stringify([tgUserName])]);
 
     if (timesheet.rows.length === 0) {
       return {
@@ -68,7 +68,7 @@ export async function editTimesheet(event, tgUserName, dataObj) { //Редакт
         };
     }
 
-    const response = await pool.query("UPDATE esp32_chips SET timesheet=$1 WHERE tg_user_names @> $2", [JSON.stringify(timesheet), JSON.stringify([tgUserName])]);
+    const response = await pool.query("UPDATE smart_devices SET timesheet=$1 WHERE tg_user_names @> $2", [JSON.stringify(timesheet), JSON.stringify([tgUserName])]);
 
     if (response.rowCount === 0) {
       return {
@@ -78,7 +78,7 @@ export async function editTimesheet(event, tgUserName, dataObj) { //Редакт
     }
 
     if (event === "update-timesheet") {
-      axios.post("http://81.200.146.157:8000/api/update-timesheet", {
+      axios.post("https://ai-firefly.ru/api/update-timesheet", {
         userName: tgUserName
       });
     }

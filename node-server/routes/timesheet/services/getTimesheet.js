@@ -4,7 +4,7 @@ import pool from "../../../modules/connectDB.js";
 async function getTimesheet(chipId) {
 
   try{
-    const timesheet = await pool.query("SELECT timesheet FROM esp32_chips WHERE id=$1", [chipId]);
+    const timesheet = await pool.query("SELECT timesheet FROM smart_devices WHERE device_id=$1", [chipId]);
 
     if (timesheet.rows.length === 0) {
       return {

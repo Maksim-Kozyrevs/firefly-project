@@ -1,7 +1,6 @@
 import express from 'express';
 
 import { checkTgLogin } from './services/checkTgLogin.js';
-import { type } from 'os';
 
 
 

@@ -17,6 +17,7 @@ export function initWS(httpServer, chipsWSMap) {
       }
 
       chipsWSMap.set(chipID, ws)
+      console.log(`New WS connection, chipId: ${chipID}, timestamp: ${new Date()}`);
       
       ws.on("message", (data) => {
         console.log(data.toString());
