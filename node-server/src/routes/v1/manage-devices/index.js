@@ -1,6 +1,6 @@
 import express from 'express';
 
-import { checkTgLogin } from './services/checkTgLogin.js';
+import { checkTgLogin } from "../../../services/manage-devices.service.js";
 
 
 

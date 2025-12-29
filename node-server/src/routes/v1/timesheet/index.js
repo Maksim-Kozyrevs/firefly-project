@@ -1,6 +1,6 @@
 import express from 'express';
-import pool from "../../modules/connectDB.js";
-import getTimesheet from './services/getTimesheet.js';
+import { getTimesheet } from "../../../services/timesheet.service.js";
+
 
 
 const router = express.Router();

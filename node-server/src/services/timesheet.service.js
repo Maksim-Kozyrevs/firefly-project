@@ -1,7 +1,8 @@
-import pool from "../../../modules/connectDB.js";
+import pool from "../utils/connectDB.js";
 
 
-async function getTimesheet(chipId) {
+
+export async function getTimesheet(chipId) {
 
   try{
     const timesheet = await pool.query("SELECT timesheet FROM smart_devices WHERE device_id=$1", [chipId]);
@@ -26,6 +27,3 @@ async function getTimesheet(chipId) {
   }
 
 }
-
-
-export default getTimesheet;

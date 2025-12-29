@@ -1,11 +1,9 @@
 import express from "express";
 import { createServer } from "http";
 
-import { initWS } from "./modules/init-ws.js";
+import { initWS } from "./ws/init-ws.js";
 
-import testApiRouter from "./routes/test-router/test-router.js";
-import manageChipsRouter from "./routes/manage-chips/manage-chips.js";
-import timesheetRouter from "./routes/timesheet/timesheet.js";
+import routerV1 from "./routes/v1/index.js";
 
 
 
@@ -19,10 +17,12 @@ const chipsWSMap = new Map();
 function startServer() {
 
   try {
+    //Настройка сервера
+    server.use(cors());
+    server.use(express.json());
+
     //Инициализация API
-    server.use("/api", testApiRouter);
-    server.use("/api", manageChipsRouter(chipsWSMap));
-    server.use("/api", timesheetRouter);
+    server.use("/v1", routerV1);
 
     //Инициализация WS
     initWS(httpServer, chipsWSMap);
