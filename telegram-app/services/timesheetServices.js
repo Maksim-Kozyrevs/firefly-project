@@ -77,11 +77,14 @@ export async function editTimesheet(event, tgUserName, dataObj) { //Редакт
       };
     }
 
-    if (event === "update-timesheet") {
-      axios.post("https://ai-firefly.ru/api/update-timesheet", {
+    axios.post("https://api.ai-firefly.ru/v1/update-timesheet",
+      {
         userName: tgUserName
-      });
-    }
+      },
+      {
+        validateStatus: (status) => (status >= 200 && status < 300) || status === 499
+      }
+    );
 
     return {
       status: true,

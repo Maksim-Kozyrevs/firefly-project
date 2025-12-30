@@ -1,8 +1,9 @@
 import { WebSocketServer } from "ws";
+import devicesMap from "../utils/devicesMap.js";
 
 
 
-export function initWS(httpServer, chipsWSMap) {
+export function initWS(httpServer) {
 
   try {
    const serverWS = new WebSocketServer({ noServer: true });
@@ -16,7 +17,7 @@ export function initWS(httpServer, chipsWSMap) {
         return;
       }
 
-      chipsWSMap.set(chipID, ws)
+      devicesMap.set(chipID, ws)
       console.log(`New WS connection, chipId: ${chipID}, timestamp: ${new Date()}`);
       
       ws.on("message", (data) => {
@@ -28,7 +29,7 @@ export function initWS(httpServer, chipsWSMap) {
       });
 
       ws.on("close", () => {
-        chipsWSMap.delete(chipID);
+        devicesMap.delete(chipID);
         console.log("Client disconnected.");
       });
     });

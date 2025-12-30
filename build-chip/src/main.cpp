@@ -150,7 +150,7 @@ void getTimesheet () {
 
   HTTPClient http;
 
-  http.begin("http://81.200.146.157:8000/api/get-timesheet/?chipid=" + CHIP_ID);
+  http.begin("https://api.ai-firefly.ru/v1/get-timesheet/?chipid=" + CHIP_ID);
   int httpCode = http.GET();
 
   if (httpCode > 0) {

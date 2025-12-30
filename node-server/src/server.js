@@ -11,8 +11,6 @@ import routerV1 from "./routes/v1/index.js";
 const server = express();
 const httpServer = createServer(server);
 
-const chipsWSMap = new Map();
-
 
 
 function startServer() {
@@ -26,7 +24,7 @@ function startServer() {
     server.use("/v1", routerV1);
 
     //Инициализация WS
-    initWS(httpServer, chipsWSMap);
+    initWS(httpServer);
 
     //Запуск сервера
     httpServer.listen(8000, () => {

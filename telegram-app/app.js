@@ -8,7 +8,7 @@ import { sendMenuTemplate, sendTimesheetTemplate } from "./services/messageTempl
 
 
 const tgBotToken = "8248086356:AAFxuPlB-z4SLiYwb22y_KIb6y8fXwlRjf8";
-const commandApi = "https://ai-firefly.ru/api/command";
+const commandApi = "https://api.ai-firefly.ru/v1/command";
 
 
 
@@ -187,7 +187,7 @@ function startTgBot() {
             const response = await editTimesheet(userStep.type == "update-timesheet" ? "update-timesheet" : "add-timesheet", `@${userName}`, dataObj);
 
             if (!response.status) {
-              tgBot.sendMessage(userId, "При обработке запроса возникла ошибка, попробуйте позже.");
+              tgBot.sendMessage(userId, `При обработке запроса возникла ошибка, попробуйте позже.\n\Error code: ${response.httpCode}\n\rError: ${response.data}`);
               return;
             }
 
