@@ -1,10 +1,14 @@
+#FireFly
+node_modules/
+
 #Node Server
-/node-server/node_modules
+apps/node-server/node_modules/
 
 #Telegram App
-/telegram-app/node_modules
+apps/telegram-app/node_modules/
 
 #Mobile App
-/mobile-app
+mobile-app/
 
-/Product-project
+#Devices Build
+devices-build/

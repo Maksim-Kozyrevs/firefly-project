@@ -1,0 +1,30 @@
+{
+  "name": "firefly",
+  "version": "1.0.0",
+  "description": "",
+  "private": true,
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start:yandex-server": "npm start -w @project/yandex-server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Maksim-Kozyrevs/firefly-project.git"
+  },
+  "keywords": [],
+  "author": "Maksim Kozyrev",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Maksim-Kozyrevs/firefly-project/issues"
+  },
+  "homepage": "https://github.com/Maksim-Kozyrevs/firefly-project#readme",
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3"
+  }
+}

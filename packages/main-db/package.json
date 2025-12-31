@@ -1,0 +1,7 @@
+{
+  "name": "@project/main-db",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Main database in FireFly Server.",
+  "main": "index.js"
+}
