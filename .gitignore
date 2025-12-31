@@ -1,11 +1,14 @@
 #FireFly
 node_modules/
 
-#Node Server
+#FireFly Server
 apps/node-server/node_modules/
 
 #Telegram App
 apps/telegram-app/node_modules/
+
+#Yandex Server
+apps/yandex-server/node_modules/
 
 #Mobile App
 mobile-app/
