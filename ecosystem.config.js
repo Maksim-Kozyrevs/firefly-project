@@ -13,8 +13,14 @@ export const apps = [
     script: "./apps/node-server/src/server.js",
     env: process.env
   },*/
-  {
+  /*{
     name: "telegram-app",
-    script: "./apps/telegram-app/app.js"
+    script: "./apps/telegram-app/app.js",
+    env: process.env
+  },*/
+  {
+    name: "yandex-server",
+    script: "./apps/yandex-server/src/server.js",
+    env: process.env
   }
 ];
