@@ -10,7 +10,7 @@ import v1Router from "./routes/v1/index.js";
 
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-configDotenv.config({
+dotenv.config({
   path: path.join(__dirname, "../../../.env")
 });
 
