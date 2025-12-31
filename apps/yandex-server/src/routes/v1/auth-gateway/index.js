@@ -41,7 +41,7 @@ router.use("/check-auth", async (req, res) => {
   } catch (error) {
     res.status(500).json({
       status: false,
-      data: "Ошибка на сервере, попробуйте снова."
+      data: "Ошибка на сервере, попробуйте снова.",
     });
   }
 
