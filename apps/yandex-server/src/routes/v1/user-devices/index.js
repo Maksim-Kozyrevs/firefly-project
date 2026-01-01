@@ -34,7 +34,6 @@ router.use("/", bearerAuth, async (req, res) => {
                 reportable: false,
                 parameters: {
                   instance: "volume",
-                  //unit: "unit.lit er",
                   range: {
                     min: 5,
                     max: 500,
@@ -69,6 +68,34 @@ router.use("/", bearerAuth, async (req, res) => {
   }
 
 });
+
+router.use("/action", (req, res) => {
+
+  console.log(req.body);
+
+  res.json({
+    "request_id": req.headers["x-request-id"],
+      "payload": {
+        "devices": [
+          {
+            "id": "3547f5dc-bc55-497e-834b-88dab0b2cd09",
+            "capabilities": [
+              {
+                "type": "devices.capabilities.range",
+                "state": {
+                  "instance": "volume",
+                  "action_result": {
+                    "status": "DONE"
+                  }
+                }
+              }
+            ]
+          }
+        ]
+      }
+  });
+
+})
 
 
 
