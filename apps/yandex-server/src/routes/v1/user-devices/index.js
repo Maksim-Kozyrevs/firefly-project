@@ -60,16 +60,16 @@ router.use("/", bearerAuth, async (req, res) => {
                   instance: "program",
                   modes: [
                     {
-                      value: "25", name: "Порция 25 грамм",
+                      value: "weight_25", name: "Порция 25 грамм",
                     },
                     {
-                      value: "50", name: "Порция 50 грамм"
+                      value: "weight_50", name: "Порция 50 грамм"
                     },
                     {
-                      value: "75", name: "Порция 75 грамм"
+                      value: "weight_75", name: "Порция 75 грамм"
                     },
                     {
-                      value: "100", name: "Порция 100 грамм"
+                      value: "weight_100", name: "Порция 100 грамм"
                     },
                   ],
                 },
