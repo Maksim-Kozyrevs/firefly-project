@@ -73,3 +73,51 @@ export async function getYandexToken(refresh_token) {
   }
 
 };
+
+export async function refreshYandexToken(refresh_token) {
+
+  try {
+    if (!refresh_token) {
+      return {
+        status: false,
+        code: 400,
+        data: "empty_refresh_token"
+      };
+    }
+
+    const tokenData = getYandexToken(refresh_token);
+
+    if (!tokenData.status) {
+      return tokenData;
+    }
+
+    const newTokenResponse = createYandexToken(tokenData.data.user_id);
+
+    if (newTokenResponse.status) {
+      return newTokenResponse;
+    }
+
+    const response = pool.query("DELETE FROM yandex_tokens WHERE refresh_token=$1", [refresh_token]);
+
+    if (response.rowCount === 0) {
+      return {
+        status: false,
+        code: 500,
+        data: "server_error"
+      };
+    }
+
+    return {
+      status: true,
+      code: 200,
+      data: newTokenResponse.data
+    };
+  } catch (error) {
+    return {
+      status: false,
+      code: 500,
+      data: "server_error"
+    };
+  }
+
+}

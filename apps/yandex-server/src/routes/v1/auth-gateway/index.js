@@ -1,7 +1,7 @@
 import express from "express";
 import { login } from "@project/auth";
 import { createTemporaryToken, getTemporaryToken } from "@project/tokens-manage";
-import { createYandexToken, getYandexToken } from "./auth.services.js";
+import { createYandexToken, getYandexToken, refreshYandexToken } from "./auth.services.js";
 
 
 
@@ -81,14 +81,7 @@ router.post("/token", async (req, res) => {
       case "refresh_token":
         const refresh_token = req.body.refresh_token;
 
-        const oldTokenData = await getYandexToken(refresh_token);
-
-        if (!oldTokenData.status) {
-          res.status(oldTokenData.code).json(oldTokenData);
-          return;
-        }
-
-        response = await createYandexToken(oldTokenData.data.user_id);
+        const response = await refreshYandexToken(refresh_token);
 
         if (!response.status) {
           res.status(response.code).json(response);
@@ -100,7 +93,7 @@ router.post("/token", async (req, res) => {
           access_token: response.data.access_token,
           refresh_token: response.data.refresh_token,
           expires_in: 31536000,
-        })
+        });
         return;
       default:
         res.status(400).json({
