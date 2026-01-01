@@ -61,6 +61,7 @@ export async function getTemporaryToken(token_id) {
       status: false,
       code: 500,
       data: "server_error",
+      error: error
     };
   }
 
