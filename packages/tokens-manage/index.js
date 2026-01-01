@@ -41,7 +41,7 @@ export async function getTemporaryToken(token_id) {
       };
     };
 
-    const response = pool.query("SELECT * FROM temporary_tokens WHERE token_id=$1", [token_id]);
+    const response = await pool.query("SELECT * FROM temporary_tokens WHERE token_id=$1", [token_id]);
 
     if (response.rowCount === 0) {
       return {
