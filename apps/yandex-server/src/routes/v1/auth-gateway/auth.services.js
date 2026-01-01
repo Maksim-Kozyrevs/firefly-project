@@ -107,11 +107,7 @@ export async function refreshYandexToken(refresh_token) {
       };
     }
 
-    return {
-      status: true,
-      code: 200,
-      data: newTokenResponse.data
-    };
+    return newTokenResponse;
   } catch (error) {
     return {
       status: false,

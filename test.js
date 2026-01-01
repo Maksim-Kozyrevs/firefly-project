@@ -20,7 +20,7 @@ async function postData(url = '', data = {}) {
 const apiUrl = "https://api.ai-firefly.ru/yandex/v1.0/token";
 const userData = {
     grant_type: "refresh_token",
-    refresh_token: "02cb33aa-e33f-4b6b-a4d5-5bfea36016df"
+    refresh_token: "a091baf6-ae20-4a0a-8856-e01a72f93408"
 };
 
 postData(apiUrl, userData)

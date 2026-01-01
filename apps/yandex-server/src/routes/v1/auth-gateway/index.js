@@ -81,7 +81,7 @@ router.post("/token", async (req, res) => {
       case "refresh_token":
         const refresh_token = req.body.refresh_token;
 
-        const response = await refreshYandexToken(refresh_token);
+        response = await refreshYandexToken(refresh_token);
 
         if (!response.status) {
           res.status(response.code).json(response);
