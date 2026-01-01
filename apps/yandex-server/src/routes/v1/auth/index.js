@@ -37,7 +37,7 @@ router.use("/check-auth", async (req, res) => {
       return;
     }
 
-    res.redirect(`${redirect_url}?state=${state}&${response_type}=${response.data.token_id}`);    
+    res.redirect(`${redirect_uri}?state=${state}&${response_type}=${response.data.token_id}`);    
   } catch (error) {
     res.status(500).json({
       status: false,
