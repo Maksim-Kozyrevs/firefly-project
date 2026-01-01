@@ -57,16 +57,16 @@ router.use("/", bearerAuth, async (req, res) => {
                 retrievable: false,
                 reportable: false,
                 parameters: {
-                  instance: "program",
+                  instance: "work_speed",
                   modes: [
                     {
-                      value: "one", name: "Маленькая",
+                      value: "low", name: "Маленькая",
                     },
                     {
-                      value: "two", name: "Средняя"
+                      value: "medium", name: "Средняя"
                     },
                     {
-                      value: "three", name: "Большая"
+                      value: "high", name: "Большая"
                     },
                   ],
                 },
