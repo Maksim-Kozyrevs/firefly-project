@@ -85,19 +85,19 @@ export async function refreshYandexToken(refresh_token) {
       };
     }
 
-    const tokenData = getYandexToken(refresh_token);
+    const tokenData = await getYandexToken(refresh_token);
 
     if (!tokenData.status) {
       return tokenData;
     }
 
-    const newTokenResponse = createYandexToken(tokenData.data.user_id);
+    const newTokenResponse = await createYandexToken(tokenData.data.user_id);
 
     if (newTokenResponse.status) {
       return newTokenResponse;
     }
 
-    const response = pool.query("DELETE FROM yandex_tokens WHERE refresh_token=$1", [refresh_token]);
+    const response = await pool.query("DELETE FROM yandex_tokens WHERE refresh_token=$1", [refresh_token]);
 
     if (response.rowCount === 0) {
       return {
