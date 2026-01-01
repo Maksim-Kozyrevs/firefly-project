@@ -16,5 +16,7 @@ mobile-app/
 #Devices Build
 devices-build/
 
-#Test Scripts
+#Files
+.env
+ecosystem.config
 test.js
