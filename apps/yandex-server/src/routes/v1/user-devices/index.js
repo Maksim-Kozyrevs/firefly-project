@@ -9,7 +9,7 @@ const router = express.Router();
 
 router.use("/action", (req, res) => {
 
-  console.log(req.body);
+  console.log(req.body.payload.devices[0].capabilities[0].state.value);
 
   res.json({
     "request_id": req.headers["x-request-id"],
