@@ -31,9 +31,10 @@ export async function createYandexToken(user_id) {
   } catch (error) {
     return {
       status: false,
-      code: 400,
-      data: "empty_user_id"
+      code: 500,
+      data: "server_error"
     };
+    console.error(error);
   }
 
 };

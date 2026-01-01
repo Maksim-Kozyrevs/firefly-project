@@ -64,10 +64,6 @@ router.post("/token", async (req, res) => {
           return;
         }
 
-        console.log(getTokenResponse)
-        console.log(getTokenResponse.data.data)
-        console.log(typeof getTokenResponse.data.data)
-        console.log(getTokenResponse.data.data.user_id)
         response = await createYandexToken(getTokenResponse.data.data.user_id);
 
         if (!response.status) {
