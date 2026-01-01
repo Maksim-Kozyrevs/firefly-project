@@ -11,7 +11,7 @@ const router = express.Router();
 
 router.get("/auth", async (req, res) => {
 
-  res.redirect(`https://ai-firefly.ru/yandex/v1.0/check-auth?${new URLSearchParams(req.query).toString()}`);
+  res.redirect(`https://api.ai-firefly.ru/yandex/v1.0/check-auth?${new URLSearchParams(req.query).toString()}`);
 
 });
 
