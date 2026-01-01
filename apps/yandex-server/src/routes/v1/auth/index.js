@@ -18,8 +18,8 @@ router.get("/auth", async (req, res) => {
 router.use("/check-auth", async (req, res) => {
 
   try {
-    //const { email, password, redirect_url, state, response_type, client_id } = req.body;
-    const { redirect_url, state, response_type } = req.query;
+    //const { email, password, redirect_uri, state, response_type, client_id } = req.body;
+    const { redirect_uri, state, response_type } = req.query;
     const email = "max.s.kozyrevkms@gmail.com";
     const password = "MaksimScience111!!!";
 
