@@ -21,7 +21,7 @@ router.use("/", bearerAuth, async (req, res) => {
             id: "3547f5dc-bc55-497e-834b-88dab0b2cd09", 
             name: "Smart Dish",
             description: "Умная кормушка для домашних питомцев",
-            type: "devices.types.pet_feeder",
+            type: "devices.types.other",
             capabilities: [
               {
                 type: "devices.capabilities.on_off",
@@ -33,11 +33,11 @@ router.use("/", bearerAuth, async (req, res) => {
                 retrievable: false,
                 reportable: false,
                 parameters: {
-                  instance: "open",
-                  unit: "unit.percent",
+                  instance: "amount",
+                  unit: "unit.gram",
                   range: {
                     min: 5,
-                    max: 100,
+                    max: 500,
                     precision: 5
                   }
                 }
