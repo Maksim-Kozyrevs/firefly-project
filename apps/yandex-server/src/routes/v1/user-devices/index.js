@@ -25,13 +25,8 @@ router.use("/", bearerAuth, async (req, res) => {
             "type": "devices.types.pet_feeder",
             "capabilities": [
               {
-                "type": "devices.capabilities.range",
-                "retrievable": true,
-                "parameters": {
-                  "instance": "amount",
-                  "unit": "unit.gram",
-                  "range": { "min": 10, "max": 500, "precision": 10 }
-                }
+                "type": "devices.capabilities.on_off",
+                "retrievable": true
               }
             ],
             "properties": [
@@ -39,8 +34,8 @@ router.use("/", bearerAuth, async (req, res) => {
                 "type": "devices.properties.float",
                 "retrievable": true,
                 "parameters": {
-                  "instance": "amount",
-                  "unit": "unit.gram"
+                  "instance": "food_level",
+                  "unit": "unit.percent"
                 }
               }
             ]
