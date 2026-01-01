@@ -60,8 +60,7 @@ export async function getTemporaryToken(token_id) {
     return {
       status: false,
       code: 500,
-      data: "server_error",
-      error: error
+      data: "server_error"
     };
   }
 

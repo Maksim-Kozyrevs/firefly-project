@@ -58,14 +58,13 @@ router.post("/token", async (req, res) => {
         const code = req.body.code;
 
         const getTokenResponse = await getTemporaryToken(code);
-        console.warn(getTokenResponse);
 
         if (!getTokenResponse.status) {
           res.status(getTokenResponse.code).json(getTokenResponse)
           return;
         }
 
-        response = await createYandexToken(JSON.parse(getTokenResponse.data.data).user_id);
+        response = await createYandexToken(getTokenResponse.data.data.user_id);
 
         if (!response.status) {
           res.status(response.code).json(response);
