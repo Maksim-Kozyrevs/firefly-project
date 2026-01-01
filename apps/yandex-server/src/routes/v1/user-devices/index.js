@@ -34,7 +34,7 @@ router.use("/", bearerAuth, async (req, res) => {
                 reportable: false,
                 parameters: {
                   instance: "open",
-                  unit: "unit.gram",
+                  unit: "unit.percent",
                   range: {
                     min: 5,
                     max: 500,
