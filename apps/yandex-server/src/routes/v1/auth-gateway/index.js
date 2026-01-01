@@ -58,6 +58,7 @@ router.post("/token", async (req, res) => {
         const code = req.body.code;
 
         const getTokenResponse = await getTemporaryToken(code);
+        console.warn(getTokenResponse);
 
         if (!getTokenResponse.status) {
           res.status(getTokenResponse.code).json(getTokenResponse)
