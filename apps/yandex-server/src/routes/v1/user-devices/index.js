@@ -53,7 +53,7 @@ router.use("/", bearerAuth, async (req, res) => {
             type: "devices.types.pet_feeder",
             capabilities: [
               {
-                type: "devices.capabilities.ьщву",
+                type: "devices.capabilities.mode",
                 retrievable: false,
                 reportable: false,
                 parameters: {
