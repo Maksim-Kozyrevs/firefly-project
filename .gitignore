@@ -17,6 +17,6 @@ mobile-app/
 devices-build/
 
 #Files
-.env
+#.env
 ecosystem.config
 test.js
