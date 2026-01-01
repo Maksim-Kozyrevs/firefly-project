@@ -57,16 +57,16 @@ router.use("/", bearerAuth, async (req, res) => {
                 retrievable: false,
                 reportable: false,
                 parameters: {
-                  instance: "cup_size",
+                  instance: "program",
                   modes: [
                     {
-                      value: "small", name: "Порция 25 грамм",
+                      value: "one", name: "Маленькая",
                     },
                     {
-                      value: "medium", name: "Порция 50 грамм"
+                      value: "two", name: "Средняя"
                     },
                     {
-                      value: "large", name: "Порция 75 грамм"
+                      value: "three", name: "Большая"
                     },
                   ],
                 },
