@@ -7,12 +7,6 @@ import v1Router from "./routes/v1/index.js";
 
 
 
-const originalExit = process.exit;
-process.exit = (code) => {
-  console.error('КТО-ТО ВЫЗВАЛ process.exit! Стек вызовов:');
-  console.trace();
-  originalExit(code);
-};
 const server = express();
 
 //Инициализация .env
