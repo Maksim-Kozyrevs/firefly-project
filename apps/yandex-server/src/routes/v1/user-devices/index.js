@@ -7,6 +7,34 @@ const router = express.Router();
 
 
 
+router.use("/action", (req, res) => {
+
+  console.log(req.body);
+
+  res.json({
+    "request_id": req.headers["x-request-id"],
+      "payload": {
+        "devices": [
+          {
+            "id": "3547f5dc-bc55-497e-834b-88dab0b2cd09",
+            "capabilities": [
+              {
+                "type": "devices.capabilities.range",
+                "state": {
+                  "instance": "volume",
+                  "action_result": {
+                    "status": "DONE"
+                  }
+                }
+              }
+            ]
+          }
+        ]
+      }
+  });
+
+});
+
 router.use("/", bearerAuth, async (req, res) => {
 
   try {
@@ -68,34 +96,6 @@ router.use("/", bearerAuth, async (req, res) => {
   }
 
 });
-
-router.use("/action", (req, res) => {
-
-  console.log(req.body);
-
-  res.json({
-    "request_id": req.headers["x-request-id"],
-      "payload": {
-        "devices": [
-          {
-            "id": "3547f5dc-bc55-497e-834b-88dab0b2cd09",
-            "capabilities": [
-              {
-                "type": "devices.capabilities.range",
-                "state": {
-                  "instance": "volume",
-                  "action_result": {
-                    "status": "DONE"
-                  }
-                }
-              }
-            ]
-          }
-        ]
-      }
-  });
-
-})
 
 
 
