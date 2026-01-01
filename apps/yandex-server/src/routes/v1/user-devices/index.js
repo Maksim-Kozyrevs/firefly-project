@@ -49,7 +49,7 @@ router.use("/", bearerAuth, async (req, res) => {
       }
     };
 
-
+    res.json(responseJson);
   } catch (error) {
     res.json({
       status: false,
