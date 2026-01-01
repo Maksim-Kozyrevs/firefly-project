@@ -45,30 +45,35 @@ router.use("/", bearerAuth, async (req, res) => {
       payload: {
         user_id: "fb9c1d8e-0a1d-4923-9bee-e2f4d5672f70",
         devices: [
+
           {
             id: "3547f5dc-bc55-497e-834b-88dab0b2cd09", 
             name: "Smart Dish",
             description: "Умная кормушка для домашних питомцев",
-            type: "devices.types.other",
+            type: "devices.types.pet_feeder",
             capabilities: [
               {
-                type: "devices.capabilities.on_off",
-                retrievable: false,
-                reportable: false
-              },
-              {
-                type: "devices.capabilities.range",
+                type: "devices.capabilities.ьщву",
                 retrievable: false,
                 reportable: false,
                 parameters: {
-                  instance: "volume",
-                  range: {
-                    min: 5,
-                    max: 500,
-                    precision: 5
-                  }
-                }
-              }
+                  instance: "program",
+                  modes: [
+                    {
+                      value: "25", name: "Порция 25 грамм",
+                    },
+                    {
+                      value: "50", name: "Порция 50 грамм"
+                    },
+                    {
+                      value: "75", name: "Порция 75 грамм"
+                    },
+                    {
+                      value: "100", name: "Порция 100 грамм"
+                    },
+                  ],
+                },
+              },
             ],
             properties: [
               {
@@ -78,15 +83,16 @@ router.use("/", bearerAuth, async (req, res) => {
                 parameters: {
                   instance: "food_level",
                   unit: "unit.percent"
-                }
-              }
-            ]
+                },
+              },
+            ],
           }
-        ]
-      }
+
+        ],
+      },
     };
 
-    res.json(responseJson);
+    res.status(200).json(responseJson);
   } catch (error) {
     res.json({
       status: false,
