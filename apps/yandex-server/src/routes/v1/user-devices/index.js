@@ -37,7 +37,7 @@ router.use("/", bearerAuth, async (req, res) => {
                   unit: "unit.percent",
                   range: {
                     min: 5,
-                    max: 500,
+                    max: 100,
                     precision: 5
                   }
                 }
