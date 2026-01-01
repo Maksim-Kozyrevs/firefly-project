@@ -33,7 +33,7 @@ router.use("/", bearerAuth, async (req, res) => {
                 retrievable: false,
                 reportable: false,
                 parameters: {
-                  instance: "channel",
+                  instance: "volume",
                   //unit: "unit.lit er",
                   range: {
                     min: 5,
