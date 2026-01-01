@@ -69,40 +69,33 @@ router.use("/", bearerAuth, async (req, res) => {
 
 });
 
-router.post("/action", (req, res) => {
-  const requestId = req.headers["x-request-id"];
-  
-  // Логируем для отладки
-  console.log(`[${new Date().toISOString()}] Action Request ID: ${requestId}`);
-  
-  if (!req.body.payload || !req.body.payload.devices) {
-    return res.status(400).json({ error: "Invalid payload" });
-  }
+router.use("/action", (req, res) => {
 
-  const responseDevices = req.body.payload.devices.map(device => {
-    return {
-      id: device.id,
-      capabilities: device.capabilities.map(cap => ({
-        type: cap.type,
-        state: {
-          instance: cap.state.instance,
-          action_result: {
-            status: "DONE"
+  console.log(req.body);
+
+  res.json({
+    "request_id": req.headers["x-request-id"],
+      "payload": {
+        "devices": [
+          {
+            "id": "3547f5dc-bc55-497e-834b-88dab0b2cd09",
+            "capabilities": [
+              {
+                "type": "devices.capabilities.range",
+                "state": {
+                  "instance": "volume",
+                  "action_result": {
+                    "status": "DONE"
+                  }
+                }
+              }
+            ]
           }
-        }
-      }))
-    };
+        ]
+      }
   });
 
-  const responsePayload = {
-    request_id: requestId,
-    payload: {
-      devices: responseDevices
-    }
-  };
-
-  res.status(200).json(responsePayload);
-});
+})
 
 
 
