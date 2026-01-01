@@ -13,7 +13,7 @@ router.use("/", bearerAuth, async (req, res) => {
     const bearerToken = bearer_token;
 
     const responseJson = {
-      "request_id": bearerToken,
+      "request_id": req.headers["x-request-id"],
       "payload": {
         "user_id": "fb9c1d8e-0a1d-4923-9bee-e2f4d5672f70",
         "devices": [
