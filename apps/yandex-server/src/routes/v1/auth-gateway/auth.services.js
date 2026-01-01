@@ -13,7 +13,7 @@ export async function createYandexToken(user_id) {
       };
     }
 
-    const response = await pool.query("INSERT INTO yandex_tokens (user_id) VALUE ($1) RETURNING *", [user_id]);
+    const response = await pool.query("INSERT INTO yandex_tokens (user_id) VALUES ($1) RETURNING *", [user_id]);
 
     if (response.rowCount === 0) {
       return {
@@ -29,7 +29,6 @@ export async function createYandexToken(user_id) {
       data: response.rows[0]
     }
   } catch (error) {
-    console.error(error);
     return {
       status: false,
       code: 500,
