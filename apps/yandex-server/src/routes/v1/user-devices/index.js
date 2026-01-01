@@ -13,29 +13,44 @@ router.use("/", bearerAuth, async (req, res) => {
     const bearerToken = req.bearer_token;
 
     const responseJson = {
-      "request_id": req.headers["x-request-id"],
-      "payload": {
-        "user_id": "fb9c1d8e-0a1d-4923-9bee-e2f4d5672f70",
-        "devices": [
+      request_id: req.headers["x-request-id"],
+      payload: {
+        user_id: "fb9c1d8e-0a1d-4923-9bee-e2f4d5672f70",
+        devices: [
           {
-            "id": "3547f5dc-bc55-497e-834b-88dab0b2cd09", 
-            "name": "Smart Dish",
-            "description": "Умная кормушка для домашних питомцев",
-            "room": "Кухня",
-            "type": "devices.types.pet_feeder",
-            "capabilities": [
+            id: "3547f5dc-bc55-497e-834b-88dab0b2cd09", 
+            name: "Smart Dish",
+            description: "Умная кормушка для домашних питомцев",
+            type: "devices.types.pet_feeder",
+            capabilities: [
               {
-                "type": "devices.capabilities.on_off",
-                "retrievable": true
+                type: "devices.capabilities.on_off",
+                retrievable: false,
+                reportable: false
+              },
+              {
+                type: "devices.capabilities.range",
+                retrievable: false,
+                reportable: false,
+                parameters: {
+                  instance: "open",
+                  unit: "unit.gram",
+                  range: {
+                    min: 5,
+                    max: 500,
+                    precision: 5
+                  }
+                }
               }
             ],
-            "properties": [
+            properties: [
               {
-                "type": "devices.properties.float",
-                "retrievable": true,
-                "parameters": {
-                  "instance": "food_level",
-                  "unit": "unit.percent"
+                type: "devices.properties.float",
+                retrievable: false,
+                reportable: false,
+                parameters: {
+                  instance: "food_level",
+                  unit: "unit.percent"
                 }
               }
             ]
