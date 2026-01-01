@@ -57,19 +57,16 @@ router.use("/", bearerAuth, async (req, res) => {
                 retrievable: false,
                 reportable: false,
                 parameters: {
-                  instance: "cleanup_mode",
+                  instance: "cleanup_modcup_size",
                   modes: [
                     {
-                      value: "v25", name: "Порция 25 грамм",
+                      value: "small", name: "Порция 25 грамм",
                     },
                     {
-                      value: "v50", name: "Порция 50 грамм"
+                      value: "medium", name: "Порция 50 грамм"
                     },
                     {
-                      value: "v75", name: "Порция 75 грамм"
-                    },
-                    {
-                      value: "v100", name: "Порция 100 грамм"
+                      value: "large", name: "Порция 75 грамм"
                     },
                   ],
                 },
