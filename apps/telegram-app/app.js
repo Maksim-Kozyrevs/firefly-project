@@ -1,5 +1,6 @@
 import TelegramBot from "node-telegram-bot-api";
 import axios from "axios";
+import envConfig from "@project/env";
 
 import { editTimesheet } from "./services/timesheetServices.js";
 import cleanUserStatus from "./services/cleanUserStatus.js";
@@ -7,7 +8,10 @@ import { sendMenuTemplate, sendTimesheetTemplate } from "./services/messageTempl
 
 
 
-const tgBotToken = "";
+//Инициализация .env
+envConfig();
+
+const tgBotToken = process.env.TELEGRAM_DEVICES_BOT_TOCKEN;
 const commandApi = "https://api.ai-firefly.ru/v1/command";
 
 

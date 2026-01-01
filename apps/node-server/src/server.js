@@ -1,15 +1,18 @@
 import express from "express";
 import { createServer } from "http";
 import cors from "cors";
+import envConfig from "@project/env";
 
 import { initWS } from "./ws/init-ws.js";
-
 import routerV1 from "./routes/v1/index.js";
 
 
 
 const server = express();
 const httpServer = createServer(server);
+
+//Инициализация .env
+envConfig();
 
 
 
@@ -27,7 +30,7 @@ function startServer() {
     initWS(httpServer);
 
     //Запуск сервера
-    httpServer.listen(8000, () => {
+    httpServer.listen(process.env.FIREFLY_SERVER_PORT, () => {
       console.log("Server is starting.");
     });
 

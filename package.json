@@ -5,11 +5,14 @@
   "private": true,
   "workspaces": [
     "packages/*",
-    "apps/*"
+    "apps/*",
+    "configs/*"
   ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start:yandex-server": "npm start -w @project/yandex-server"
+    "start:yandex-server": "npm start -w yandex-server",
+    "start:firefly-server": "npm start -w firefly-server",
+    "start:telegram-app": "npm start -w telegram-app"
   },
   "repository": {
     "type": "git",

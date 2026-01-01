@@ -1,4 +1,4 @@
-import pool from "../modules/connectDB.js";
+import pool from "@project/main-db";
 import axios from "axios";
 
 

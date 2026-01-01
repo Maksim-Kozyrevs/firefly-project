@@ -1,4 +1,4 @@
-import pool from "../utils/connectDB.js";
+import pool from "@project/main-db";
 
 
 
