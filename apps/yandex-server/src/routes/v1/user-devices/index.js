@@ -60,7 +60,7 @@ router.use("/", bearerAuth, async (req, res) => {
                   instance: "work_speed",
                   modes: [
                     {
-                      value: "low", name: "Маленькая порция",
+                      value: "min", name: "Маленькая порция",
                     },
                     {
                       value: "medium", name: "Средняя порция"
