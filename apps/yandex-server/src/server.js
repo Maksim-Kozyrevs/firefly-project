@@ -29,7 +29,7 @@ function startServer() {
         data: "Success!",
       });
     });
-    server.use("/yandex/v1.0/", v1Router);
+    //server.use("/yandex/v1.0/", v1Router);
 
 
     server.listen(process.env.YANDEX_SERVER_PORT, () => {
