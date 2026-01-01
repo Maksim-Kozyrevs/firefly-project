@@ -93,7 +93,7 @@ export async function refreshYandexToken(refresh_token) {
 
     const newTokenResponse = await createYandexToken(tokenData.data.user_id);
 
-    if (newTokenResponse.status) {
+    if (!newTokenResponse.status) {
       return newTokenResponse;
     }
 
