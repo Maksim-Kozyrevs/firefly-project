@@ -15,3 +15,6 @@ mobile-app/
 
 #Devices Build
 devices-build/
+
+#Test Scripts
+test.js
