@@ -29,12 +29,12 @@ export async function createYandexToken(user_id) {
       data: response.rows[0]
     }
   } catch (error) {
+    console.error(error);
     return {
       status: false,
       code: 500,
       data: "server_error"
     };
-    console.error(error);
   }
 
 };
