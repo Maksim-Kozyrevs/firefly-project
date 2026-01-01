@@ -1,4 +1,4 @@
-const bearerAuth = (req, res, next) => {
+export const bearerAuth = (req, res, next) => {
 
   const authHeader = req.headers["authorization"];
 
@@ -25,7 +25,3 @@ const bearerAuth = (req, res, next) => {
   next();
 
 }
-
-
-
-export default bearerAuth;

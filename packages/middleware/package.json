@@ -1,5 +1,5 @@
 {
-  "name": "@project/bearer-auth",
+  "name": "@project/middleware",
   "version": "1.0.0",
   "description": "",
   "type": "module",

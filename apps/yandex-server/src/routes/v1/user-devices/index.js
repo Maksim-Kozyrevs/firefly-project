@@ -1,5 +1,5 @@
 import express from "express";
-import bearerAuth from "@project/bearer-auth";
+import { bearerAuth } from "@project/middleware";
 
 
 
