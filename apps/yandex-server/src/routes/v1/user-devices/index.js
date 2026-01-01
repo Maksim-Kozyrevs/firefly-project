@@ -60,13 +60,13 @@ router.use("/", bearerAuth, async (req, res) => {
                   instance: "work_speed",
                   modes: [
                     {
-                      value: "low", name: "Маленькая",
+                      value: "low", name: "Маленькая порция",
                     },
                     {
-                      value: "medium", name: "Средняя"
+                      value: "medium", name: "Средняя порция"
                     },
                     {
-                      value: "high", name: "Большая"
+                      value: "high", name: "Большая порция"
                     },
                   ],
                 },
