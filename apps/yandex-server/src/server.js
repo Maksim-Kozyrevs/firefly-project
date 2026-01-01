@@ -21,6 +21,12 @@ function startServer() {
     server.use(express.json());
     server.use(express.urlencoded({ extended: true }));
 
+    server.use((req, res, next) => {
+      console.log(`[${new Date().toISOString()}] ${req.method} ${req.url}`);
+      console.log('Headers:', JSON.stringify(req.headers));
+      next();
+    });
+
     //API
     server.get("/", (req, res) => {
       res.json({

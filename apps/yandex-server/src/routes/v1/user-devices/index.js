@@ -10,7 +10,7 @@ const router = express.Router();
 router.use("/", bearerAuth, async (req, res) => {
 
   try {
-    //const bearerToken = req.bearer_token;
+    const bearerToken = req.bearer_token;
 
     const responseJson = {
       "request_id": req.headers["x-request-id"],
