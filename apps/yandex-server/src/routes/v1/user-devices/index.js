@@ -47,6 +47,7 @@ router.use("/", bearerAuth, asyncAPI(async (req, res) => {
   const userId = await getUserId(bearerToken);
   const userDevices = await getUserDevices(userId);
   const response = await getUserDevicesResponse(userDevices, req.headers["x-request-id"], userId);
+  console.log(response);
 
   res.status(200).json(response);
 
