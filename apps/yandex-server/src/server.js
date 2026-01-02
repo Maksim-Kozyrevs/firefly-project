@@ -37,7 +37,7 @@ function startServer() {
       const statusCode = error.statusCode || 500;
       const data = error.message || "Ошибка на сервере, попробуйте снова.";
       
-      console.error(`Error:\n\r${error}`);
+      console.error(`Error:\n\r${error.stack}`);
 
       res.status(statusCode).json({
         status: error.status,
