@@ -1,0 +1,64 @@
+{
+  "name": "Умная миска",
+  "reportable": true,
+  "description": "Умная миска для домашних животных Smart Dish One от FireFly.",
+  "room": "Кухня",
+  "type": "devices.types.pet_feeder",
+  "custom_data": {
+    "device_type": "smart_dish",
+    "feed_weight_default": {
+      "auto": 100,
+      "low": 70,
+      "medium": 110,
+      "high": 150
+    }
+  },
+  "capabilities": [
+    {
+      "type": "devices.capabilities.on_off",
+      "retrievable": true,
+      "reportable": true
+    },
+    {
+      "type": "devices.capabilities.mode",
+      "reportable": true,
+      "retrievable": true,
+      "parameters": {
+        "instance": "program",
+        "modes": [
+          {
+            "value": "auto"
+          },
+          {
+            "value": "low"
+          },
+          {
+            "value": "medium"
+          },
+          {
+            "value": "high"
+          }
+        ]
+      }
+    }
+  ],
+  "properties": [
+    {
+      "type": "devices.properties.float",
+      "reportable": true,
+      "retrievable": true,
+      "parameters": [
+        {
+          "instance": "food_level",
+          "unit": "unit.percent"
+        }
+      ]
+    }
+  ],
+  "device_info": {
+    "manufacturer": "FireFly",
+    "model": "Smart Dish One",
+    "hw_version": "1.0.0",
+    "sw_version": "1.0.0"
+  }
+}

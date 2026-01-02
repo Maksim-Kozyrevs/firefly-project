@@ -1,5 +1,8 @@
 import express from "express";
-import { bearerAuth } from "@project/middleware";
+import { bearerAuth, asyncAPI } from "@project/middlewares";
+import getUserId from "./services/get_user_id.js";
+import { getUserDevices } from "@project/user-devices";
+import getUserDevicesResponse from "./services/get_user_devices_response.js";
 
 
 
@@ -35,70 +38,19 @@ router.use("/action", (req, res) => {
 
 });
 
-router.use("/", bearerAuth, async (req, res) => {
 
-  try {
-    const bearerToken = req.bearer_token;
+//Получение устройств пользователя
+router.use("/", bearerAuth, asyncAPI(async (req, res) => {
 
-    const responseJson = {
-      request_id: req.headers["x-request-id"],
-      payload: {
-        user_id: "fb9c1d8e-0a1d-4923-9bee-e2f4d5672f70",
-        devices: [
+  const bearerToken = req.bearer_token;
 
-          {
-            id: "3547f5dc-bc55-497e-834b-88dab0b2cd09", 
-            name: "Smart Dish",
-            description: "Умная кормушка для домашних питомцев",
-            type: "devices.types.pet_feeder",
-            capabilities: [
-              {
-                type: "devices.capabilities.mode",
-                retrievable: false,
-                reportable: false,
-                parameters: {
-                  instance: "coffee_mode",
-                  modes: [
-                    {
-                      value: "low", name: "Маленькая порция",
-                    },
-                    {
-                      value: "medium", name: "Средняя порция"
-                    },
-                    {
-                      value: "high", name: "Большая порция"
-                    },
-                  ],
-                },
-              },
-            ],
-            properties: [
-              {
-                type: "devices.properties.float",
-                retrievable: false,
-                reportable: false,
-                parameters: {
-                  instance: "food_level",
-                  unit: "unit.percent"
-                },
-              },
-            ],
-          }
+  const userId = await getUserId(bearerToken);
+  const userDevices = await getUserDevices(userId);
+  const response = await getUserDevicesResponse(userDevices, req.headers["x-request-id"], userId);
 
-        ],
-      },
-    };
+  res.status(200).json(response);
 
-    res.status(200).json(responseJson);
-  } catch (error) {
-    res.json({
-      status: false,
-      code: 500,
-      data: "server_error"
-    });
-  }
-
-});
+}));
 
 
 

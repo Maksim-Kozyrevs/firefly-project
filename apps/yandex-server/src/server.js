@@ -31,6 +31,22 @@ function startServer() {
     });
     server.use("/yandex/v1.0/", v1Router);
 
+    //Errors middleware
+    server.use((error, req, res, next) => {
+      
+      const statusCode = error.statusCode || 500;
+      const data = error.message || "Ошибка на сервере, попробуйте снова.";
+      
+      console.error(`Error:\n\r${error}`);
+
+      res.status(statusCode).json({
+        status: error.status,
+        code: statusCode,
+        data: data,
+      });
+
+    });
+
 
     server.listen(process.env.YANDEX_SERVER_PORT, () => {
       console.log(

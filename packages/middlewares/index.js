@@ -1,3 +1,7 @@
+export const asyncAPI = (funct) => {
+  Promise.resolve(funct(req, res, next)).catch(next);
+};
+
 export const bearerAuth = (req, res, next) => {
 
   const authHeader = req.headers["authorization"];
@@ -24,4 +28,4 @@ export const bearerAuth = (req, res, next) => {
 
   next();
 
-}
+};
