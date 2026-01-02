@@ -1,4 +1,4 @@
-export const asyncAPI = (funct) => {
+export const asyncAPI = (funct) => (req, res, next) => {
   Promise.resolve(funct(req, res, next)).catch(next);
 };
 
