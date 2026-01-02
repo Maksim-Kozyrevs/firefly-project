@@ -8,7 +8,7 @@ import appError from '@project/errors';
  * @param {Array} userDevices
  * @param {String} requestId
  * @param {String} userId
- * @returns {Array}
+ * @returns {Promise<Array>}
  */
 const getUserDevicesResponse = async (userDevices, requestId, userId) => {
 
@@ -24,13 +24,18 @@ const getUserDevicesResponse = async (userDevices, requestId, userId) => {
     throw new appError("devices_config_not_found", 404);
   }
 
-  const devicesArray = [];
-  userDevices.forEach((device) => {
-    const deviceConfig = deviceConfigs.find((config) => config.type_device === device.type_device).config_data;
-    deviceConfig.id = device.device_id;
+  const configsMap = new Map(deviceConfigs.map((config) => [config.type_device, config.config_data]));
 
-    devicesArray.push(deviceConfig);
-  });
+  const devicesArray = userDevices.map((device) => {
+    const deviceConfig = configsMap.get(device.type_device);
+
+    if (!deviceConfig) {
+      console.error("Not found device config in database, type_device for config:", device.type_device);
+      return null;
+    }
+
+    return { ...deviceConfig, id: device.device_id};
+  }).filter(Boolean);
   
   return {
     request_id: requestId,
