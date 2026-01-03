@@ -47,12 +47,10 @@
       "type": "devices.properties.float",
       "reportable": true,
       "retrievable": true,
-      "parameters": [
-        {
+      "parameters": {
           "instance": "food_level",
           "unit": "unit.percent"
-        }
-      ]
+      }
     }
   ],
   "device_info": {
