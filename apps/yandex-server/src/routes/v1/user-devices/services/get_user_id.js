@@ -5,7 +5,7 @@ import appError from "@project/errors";
 
 /**
  * @param {String} access_token 
- * @returns {String}
+ * @returns {Promise<String>}
  */
 async function getUserId(access_token) {
 
