@@ -10,33 +10,14 @@ const router = express.Router();
 
 
 
-router.use("/action", (req, res) => {
+//Изменение состояние устройств
+router.use("/action", asyncAPI(async (req, res) => {
 
-  console.log(req.body.payload.devices[0].capabilities[0].state.value);
+  const bearerToken = req.bearer_token;
 
-  res.json({
-    "request_id": req.headers["x-request-id"],
-      "payload": {
-        "devices": [
-          {
-            "id": "3547f5dc-bc55-497e-834b-88dab0b2cd09",
-            "capabilities": [
-              {
-                "type": "devices.capabilities.range",
-                "state": {
-                  "instance": "volume",
-                  "action_result": {
-                    "status": "DONE"
-                  }
-                }
-              }
-            ]
-          }
-        ]
-      }
-  });
+  console.log(JSON.stringify(req.body));
 
-});
+}));
 
 
 //Получение устройств пользователя
