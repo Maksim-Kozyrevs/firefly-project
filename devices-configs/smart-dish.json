@@ -17,8 +17,7 @@
     {
       "type": "devices.capabilities.on_off",
       "retrievable": true,
-      "reportable": true,
-      "value": false
+      "reportable": true
     },
     {
       "type": "devices.capabilities.mode",
