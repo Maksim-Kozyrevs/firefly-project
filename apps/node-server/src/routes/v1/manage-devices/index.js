@@ -80,6 +80,7 @@ router.all("/devices/action", async (req, res) => {
 
     const executedEventsDevices = await devicesArray.map(async (device) => {
       const response = await WSManager.sendData(device.deviceId, device.data);
+      console.log(response);
       response.deviceId = device.deviceId;
 
       return response;
