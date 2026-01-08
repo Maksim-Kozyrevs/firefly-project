@@ -19,7 +19,12 @@ router.use("/action", asyncAPI(async (req, res) => {
 
   const response = await executeEventDevices(devicesArray);
 
-  console.log(JSON.stringify(response));
+  res.status(200).json({
+    request_id: req.headers["x-request-id"],
+    payload: {
+      devices: response
+    }
+  });
 
 }));
 

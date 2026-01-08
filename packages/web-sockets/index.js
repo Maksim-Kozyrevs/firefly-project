@@ -70,7 +70,7 @@ class WebSocketsManager {
     return new Promise((resolve, reject) => {
       const pendingTimeout = setTimeout(() => {
         deviceWS.pendingMap.delete(requestUUID);
-        reject({
+        resolve({
           status: false,
           code: 499,
           data: "Устройство не подключенно."
@@ -117,7 +117,7 @@ class WebSocketsManager {
             data: data.data
           });
         } else {
-          response.reject({
+          response.relove({
             status: false,
             code: 409,
             data: "Ошибка устройства, попробуйте снова.",
