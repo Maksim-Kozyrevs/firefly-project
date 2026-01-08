@@ -11,11 +11,6 @@ const executeEventDevices = async (devicesArray) => {
 
   devicesArray.map( async (deviceObj) => {
     const deviceId = deviceObj.id;
-    const ws = devicesMap.get(deviceId);
-
-    if (!ws) {
-      throw new appError("devices_is_disabled", 499);
-    }
 
     const commandsObjArray = deviceObj.capabilities.map((capability) => {
       return {
