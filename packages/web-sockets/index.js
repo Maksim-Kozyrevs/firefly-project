@@ -67,8 +67,8 @@ class WebSocketsManager {
         pendingTimeout
       });
       deviceWS.send(JSON.stringify({
-        requestUUID,
-        data
+        requestUUID: requestUUID,
+        data: data
       }));
     });
 
