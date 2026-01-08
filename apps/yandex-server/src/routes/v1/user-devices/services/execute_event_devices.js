@@ -45,6 +45,7 @@ const executeEventDevices = async (devicesArray) => {
       actionResultObj.status = "DONE";
     } else {
       actionResultObj.status = "ERROR";
+      actionResultObj.error_code = eventResult.yandex_error_code || "INTERNAL_ERROR";
       actionResultObj.error_message = eventResult.data;
     }
 
