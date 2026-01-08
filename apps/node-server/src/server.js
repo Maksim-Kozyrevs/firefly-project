@@ -3,7 +3,7 @@ import { createServer } from "http";
 import cors from "cors";
 import envConfig from "@project/env";
 
-import { initWS } from "./ws/init-ws.js";
+import { initWS } from "@project/web-sockets";
 import routerV1 from "./routes/v1/index.js";
 
 

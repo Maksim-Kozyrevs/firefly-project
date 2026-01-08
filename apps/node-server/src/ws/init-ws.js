@@ -1,5 +1,5 @@
 import { WebSocketServer } from "ws";
-import devicesMap from "../utils/devicesMap.js";
+import devicesMap from "@project/devices-map";
 
 
 

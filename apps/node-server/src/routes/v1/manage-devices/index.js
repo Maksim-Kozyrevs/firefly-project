@@ -1,7 +1,7 @@
 import express from 'express';
 
 import { checkTgLogin } from "../../../services/manage-devices.service.js";
-import devicesMap from '../../../utils/devicesMap.js';
+import devicesMap from "@project/devices-map";
 
 
 
