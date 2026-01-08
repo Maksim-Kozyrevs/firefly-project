@@ -19,7 +19,6 @@ class WebSocketsManager {
       
       oldWS.removeAllListeners("close");
       oldWS.terminate();
-      this.#devicesMap.delete(deviceId);
     };
 
     deviceWS.deviceId = deviceId;
