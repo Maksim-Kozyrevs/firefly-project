@@ -16,9 +16,7 @@ router.use("/action", asyncAPI(async (req, res) => {
   const bearerToken = req.bearer_token;
   const devicesArray = req.body.payload.devices;
 
-  console.log(JSON.stringify(req.body));
-
-  
+  console.log(JSON.stringify(req.body));  
 
 }));
 
