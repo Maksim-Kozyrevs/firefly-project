@@ -1,16 +1,17 @@
-import devicesMap from "@project/devices-map";
 import appError from "@project/errors";
+import { WSManager } from "@project/web-sockets";
 
 
 
-const executeEventDevices = (devicesArray) => {
+const executeEventDevices = async (devicesArray) => {
 
   if (devicesArray.length === 0) {
     throw new appError("empty_user_devices", 400);
   }
 
-  devicesArray.map((deviceObj) => {
-    const ws = devicesMap.get(deviceObj.id);
+  devicesArray.map( async (deviceObj) => {
+    const deviceId = deviceObj.id;
+    const ws = devicesMap.get(deviceId);
 
     if (!ws) {
       throw new appError("devices_is_disabled", 499);
@@ -24,7 +25,11 @@ const executeEventDevices = (devicesArray) => {
       }
     });
 
-    ws.send(JSON.stringify(commandsObjArray));
+    const response = await WSManager.sendData(deviceId, commandsObjArray);    
   });
 
 };
+
+
+
+export default executeEventDevices;

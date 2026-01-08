@@ -62,7 +62,7 @@ class WebSocketsManager {
     return new Promise((resolve, reject) => {
       const pendingTimeout = setTimeout(() => {
         deviceWS.pendingMap.delete(requestUUID);
-        reject(new appError("expired_timeout", 408));
+        reject(new appError("expired_timeout", 404));
       }, 5000);
 
       deviceWS.pendingMap.set(requestUUID, {

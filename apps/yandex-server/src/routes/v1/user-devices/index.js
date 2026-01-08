@@ -3,6 +3,7 @@ import { bearerAuth, asyncAPI } from "@project/middlewares";
 import getUserId from "./services/get_user_id.js";
 import { getUserDevices } from "@project/user-devices";
 import getUserDevicesResponse from "./services/get_user_devices_response.js";
+import executeEventDevices from "./services/execute_event_devices.js";
 
 
 
@@ -16,7 +17,7 @@ router.use("/action", asyncAPI(async (req, res) => {
   const bearerToken = req.bearer_token;
   const devicesArray = req.body.payload.devices;
 
-  console.log(JSON.stringify(req.body));  
+  const response = await executeEventDevices(devicesArray);
 
 }));
 
