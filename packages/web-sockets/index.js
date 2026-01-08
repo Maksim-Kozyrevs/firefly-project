@@ -19,6 +19,8 @@ class WebSocketsManager {
       
       oldWS.removeAllListeners("close");
       oldWS.terminate();
+
+      console.log(`Disconnected device, deviceId: ${deviceId}, timestamp: ${new Date()}`);
     };
 
     deviceWS.deviceId = deviceId;
