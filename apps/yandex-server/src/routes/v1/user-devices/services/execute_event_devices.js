@@ -30,8 +30,7 @@ const executeEventDevices = async (devicesArray) => {
     });
   });
 
-  const response = await axios.post("https://api.ai-firefly.ru/v1/devices/action", responseArray);
-  response = response.data;
+  const response = await axios.post("https://api.ai-firefly.ru/v1/devices/action", responseArray).data;
 
   if (!response.status) {
     throw new appError(response.data, response.code);
