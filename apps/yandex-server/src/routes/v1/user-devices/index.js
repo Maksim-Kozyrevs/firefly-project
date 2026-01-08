@@ -14,7 +14,7 @@ const router = express.Router();
 //Изменение состояние устройств
 router.use("/action", asyncAPI(async (req, res) => {
 
-  const bearerToken = req.bearer_token;
+  //const bearerToken = req.bearer_token;
   const devicesArray = req.body.payload.devices;
 
   const response = await executeEventDevices(devicesArray);

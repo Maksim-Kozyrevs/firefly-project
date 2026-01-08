@@ -45,8 +45,7 @@ const executeEventDevices = async (devicesArray) => {
       actionResultObj.status = "DONE";
     } else {
       actionResultObj.status = "ERROR";
-      actionResultObj.error_code = "INVALID_ACTION",
-      actionResultObj.error_message = eventResult.data 
+      actionResultObj.error_message = eventResult.data;
     }
 
     devicesArray[index].capabilities.forEach(capability => {
