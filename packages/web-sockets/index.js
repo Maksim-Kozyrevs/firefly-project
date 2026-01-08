@@ -15,7 +15,10 @@ class WebSocketsManager {
   async addDevice(deviceId, deviceWS) {
     
     if (this.#devicesMap.has(deviceId)) {
-      await this.#devicesMap.get(deviceId).terminate();
+      const oldWS = this.#devicesMap.get(deviceId);
+      
+      oldWS.removeAllListeners("close");
+      oldWS.terminate();
       this.#devicesMap.delete(deviceId);
     };
 
