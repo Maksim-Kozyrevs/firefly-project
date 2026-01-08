@@ -85,7 +85,7 @@ router.all("/devices/action", async (req, res) => {
       return response;
     });
 
-    console.log(executedEventsDevices);
+    console.log(executedEventsDevices[0].data);
 
     res.json({
       status: true,
