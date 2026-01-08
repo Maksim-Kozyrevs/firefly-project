@@ -24,10 +24,10 @@ router.all("/command", express.json(), async (req, res) => {
     return;
   }
 
-  WSManager.sendData(checkResponse.deviceId, JSON.stringify({
+  WSManager.sendData(checkResponse.deviceId, {
     type: "command",
     command: command
-  }));
+  });
 
   res.json({
     status: true
@@ -49,9 +49,9 @@ router.all("/update-timesheet", express.json(), async (req, res) => {
       return;
     }
 
-    WSManager.sendData(checkResponse.deviceId, JSON.stringify({
+    WSManager.sendData(checkResponse.deviceId, {
       type: "update-timesheet"
-    }));
+    });
 
     res.json({
       status: true
