@@ -64,6 +64,30 @@ router.all("/update-timesheet", express.json(), async (req, res) => {
 
 });
 
+router.all("/devices/action", async (req, res) => {
+
+  try {
+    const devicesArray = req.body;
+
+    if (!devicesArray) {
+      res.status(404).json({
+        status: false,
+        data: "devices_not_found"
+      });
+    }
+
+    devicesArray.map(async (device) => {
+      const response = await WSManager.sendData(device.deviceId, device.data);
+    });
+  } catch (error) {
+    res.status(500).json({
+      status: false,
+      data: "server_error"
+    });
+  }
+
+});
+
 
 
 export default router;

@@ -1,5 +1,5 @@
 import appError from "@project/errors";
-import { WSManager } from "@project/web-sockets";
+import axios from "axios";
 
 
 
@@ -8,6 +8,8 @@ const executeEventDevices = async (devicesArray) => {
   if (devicesArray.length === 0) {
     throw new appError("empty_user_devices", 400);
   }
+
+  const responseArray = [];
 
   devicesArray.map( async (deviceObj) => {
     const deviceId = deviceObj.id;
@@ -20,11 +22,16 @@ const executeEventDevices = async (devicesArray) => {
       }
     });
 
-    const response = await WSManager.sendData(deviceId, {
-      type: "yandex-commands",
-      commands: commandsObjArray,
-    });    
+    responseArray.push({
+      deviceId: deviceId,
+      data: {
+        type: "yandex-commands",
+        commands: commandsObjArray,
+      }
+    });
   });
+
+  const response = await axios.post("https://api.ai-firefly.ru/v1/devices/action", responseArray);
 
 };
 
