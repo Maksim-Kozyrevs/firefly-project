@@ -25,7 +25,10 @@ const executeEventDevices = async (devicesArray) => {
       }
     });
 
-    const response = await WSManager.sendData(deviceId, commandsObjArray);    
+    const response = await WSManager.sendData(deviceId, {
+      type: "yandex-commands",
+      commands: commandsObjArray,
+    });    
   });
 
 };
