@@ -38,7 +38,7 @@ const executeEventDevices = async (devicesArray) => {
   }
 
   const executedEventsDevices = response.data;
-  console.log(response.data[0]);
+  console.log(executeEventDevices);
 
   executedEventsDevices.forEach((eventResult, index) => {
     const actionResultObj = {};
