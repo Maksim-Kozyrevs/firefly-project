@@ -16,7 +16,6 @@ const executeEventDevices = async (devicesArray) => {
 
     const commandsObjArray = deviceObj.capabilities.map((capability) => {
       return {
-        type: capability.type,
         instance: capability.state.instance,
         value: capability.state.value,
       }
@@ -32,6 +31,29 @@ const executeEventDevices = async (devicesArray) => {
   });
 
   const response = await axios.post("https://api.ai-firefly.ru/v1/devices/action", responseArray);
+
+  if (!response.status) {
+    throw new appError(response.data, response.code);
+  }
+
+  const executedEventsDevices = response.data;
+
+  executedEventsDevices.forEach((eventResult, index) => {
+    const actionResultObj = {};
+    if (eventResult.status) {
+      actionResultObj.status = "DONE";
+    } else {
+      actionResultObj.status = "ERROR";
+      actionResultObj.error_code = "INVALID_ACTION",
+      actionResultObj.error_message = eventResult.data 
+    }
+
+    devicesArray[index].capabilities.forEach(capability => {
+      capability.state.action_result = actionResultObj;
+    });
+  });
+
+  return devicesArray;
 
 };
 

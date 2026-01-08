@@ -19,6 +19,8 @@ router.use("/action", asyncAPI(async (req, res) => {
 
   const response = await executeEventDevices(devicesArray);
 
+  console.log(JSON.stringify(response));
+
 }));
 
 

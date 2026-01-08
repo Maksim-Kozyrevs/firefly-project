@@ -48,13 +48,21 @@ class WebSocketsManager {
   sendData(deviceId, data) {
 
     if (!deviceId) {
-      throw new appError("empty_device_id", 400);
+      return {
+        status: false,
+        code: 400,
+        data: "empty_device_id"
+      };
     }
     
     const deviceWS = this.#devicesMap.get(deviceId);
 
     if (!deviceWS) {
-      throw new appError("device_is_disabled", 499);
+      return {
+        status: false,
+        code: 499,
+        data: "Устройство не подключено."
+      };
     }
 
     const requestUUID = randomUUID();
@@ -62,7 +70,11 @@ class WebSocketsManager {
     return new Promise((resolve, reject) => {
       const pendingTimeout = setTimeout(() => {
         deviceWS.pendingMap.delete(requestUUID);
-        reject(new appError("expired_timeout", 404));
+        reject({
+          status: false,
+          code: 499,
+          data: "Устройство не подключенно."
+        });
       }, 5000);
 
       deviceWS.pendingMap.set(requestUUID, {
@@ -88,7 +100,11 @@ class WebSocketsManager {
         const response = deviceWS.pendingMap.get(data.requestUUID);
 
         if (!response) {
-          throw new appError("request_not_found", 404);
+          return {
+            status: false,
+            code: 408,
+            data: "Истекло время ожидания, попробуйте снова."
+          };
         }
 
         clearTimeout(response.pendingTimeout);
@@ -97,12 +113,14 @@ class WebSocketsManager {
         if (data.status) {
           response.resolve ({
             status: true,
+            code: 200,
             data: data.data
           });
         } else {
           response.reject({
             status: false,
-            data: data.data
+            code: 409,
+            data: "Ошибка устройства, попробуйте снова.",
           });
         }
       } else {
@@ -111,8 +129,8 @@ class WebSocketsManager {
     } catch (error) {
       return {
         status: false,
-        code: error.statusCode || 500,
-        data: error.message || "error_when_get_device_message",
+        code: 500,
+        data: "Ошибка на сервере, попробуйте снова. ",
         error: error,
       }
     }

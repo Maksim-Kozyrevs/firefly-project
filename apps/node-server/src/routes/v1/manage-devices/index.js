@@ -72,16 +72,28 @@ router.all("/devices/action", async (req, res) => {
     if (!devicesArray) {
       res.status(404).json({
         status: false,
+        code: 400,
         data: "devices_not_found"
       });
     }
 
-    devicesArray.map(async (device) => {
+
+    const executedEventsDevices = await devicesArray.map(async (device) => {
       const response = await WSManager.sendData(device.deviceId, device.data);
+      response.deviceId = device.deviceId;
+
+      return response;
+    });
+
+    res.json({
+      status: true,
+      code: 200,
+      data: executedEventsDevices
     });
   } catch (error) {
     res.status(500).json({
       status: false,
+      code: 500,
       data: "server_error"
     });
   }
