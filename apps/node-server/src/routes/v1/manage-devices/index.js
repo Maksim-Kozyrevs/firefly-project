@@ -28,7 +28,6 @@ router.all("/command", express.json(), async (req, res) => {
     type: "command",
     command: command
   }));
-  console.log(checkResponse.deviceId);
 
   res.json({
     status: true
