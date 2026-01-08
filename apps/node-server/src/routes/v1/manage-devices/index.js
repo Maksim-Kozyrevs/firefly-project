@@ -1,7 +1,7 @@
 import express from 'express';
 
 import { checkTgLogin } from "../../../services/manage-devices.service.js";
-import devicesMap from "@project/devices-map";
+import { WSManager } from '@project/web-sockets';
 
 
 
@@ -24,18 +24,7 @@ router.all("/command", express.json(), async (req, res) => {
     return;
   }
 
-  //Получение и проверка WS соединения платы
-  const ws = devicesMap.get(checkResponse.chipID);
-
-  if (!ws || ws.readyState !== WebSocket.OPEN) {
-    res.status(499).json({
-      status: false,
-      data: "Connection with ESP32 closed."
-    });
-    return;
-  }
-
-  ws.send(JSON.stringify({
+  WSManager.sendData(checkResponse.deviceId, JSON.stringify({
     type: "command",
     command: command
   }));
@@ -57,20 +46,10 @@ router.all("/update-timesheet", express.json(), async (req, res) => {
       res.status(404).json({
         status: false
       });
-    }
-
-    //Получение и проверка WS соединения платы
-    const ws = devicesMap.get(checkResponse.chipID);
-
-    if (!ws || ws.readyState !== WebSocket.OPEN) {
-      res.status(499).json({
-        status: false,
-        data: "Connection with ESP32 closed."
-      });
       return;
     }
 
-    ws.send(JSON.stringify({
+    WSManager.sendData(checkResponse.deviceId, JSON.stringify({
       type: "update-timesheet"
     }));
 
