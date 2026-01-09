@@ -66,7 +66,7 @@ router.post("/action", asyncAPI(async (req, res) => {
       const commandsObjArray = device.data.commands;
       
       //Обработка специальных instance
-      const specialCommandsResultArray = await commandsObjArray.map(async (commandObj) => {
+      const specialCommandsResultArray = await Promise.all(commandsObjArray.map(async (commandObj) => {
         
         try {
           if (commandObj.instance == "program") {
@@ -81,7 +81,7 @@ router.post("/action", asyncAPI(async (req, res) => {
           }
         }
 
-      });
+      }));
 
       console.log(JSON.stringify(specialCommandsResultArray));
 
