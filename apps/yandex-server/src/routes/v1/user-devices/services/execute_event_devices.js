@@ -50,7 +50,7 @@ const executeEventDevices = async (devicesArray) => {
     }
 
     devicesArray[index].capabilities.forEach(capability => {
-      const specialCommandObj = eventResult.specialCommandsError.find((commandObj) => commandObj.instance === capability.state.instance);
+      const specialCommandObj = eventResult.specialCommandsErrors.find((commandObj) => commandObj.instance === capability.state.instance);
       if (specialCommandObj) {
         capability.state.action_result = {
           status: "ERROR",
