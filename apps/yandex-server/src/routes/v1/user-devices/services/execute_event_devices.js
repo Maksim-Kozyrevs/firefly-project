@@ -55,7 +55,7 @@ const executeEventDevices = async (devicesArray) => {
         capability.state.action_result = {
           status: "ERROR",
           error_code: specialCommandObj.error_code || "INTERNAL_ERROR",
-          error_message: specialCommandObj.data || "Ошибка на сервере, попробуйте снова."
+          error_message: specialCommandObj.error_message || "Ошибка на сервере, попробуйте снова."
         }
       } else {
         capability.state.action_result = actionResultObj;

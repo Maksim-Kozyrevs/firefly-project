@@ -81,7 +81,7 @@ router.post("/action", asyncAPI(async (req, res) => {
             status: false,
             instance: commandObj.instance,
             error_code: errorCodeMap[error.statusCode] || "INTERNAL_ERROR",
-            error_message: error.message       
+            error_message: error.message
           }
         }
 
