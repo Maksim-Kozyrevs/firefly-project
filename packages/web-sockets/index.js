@@ -62,7 +62,8 @@ class WebSocketsManager {
         status: false,
         code: 499,
         data: "Устройство не подключено.",
-        yandex_error_code: "DEVICE_OFF"
+        yandex_error_code: "DEVICE_OFF",
+        deviceId: deviceId
       };
     }
 
@@ -75,7 +76,8 @@ class WebSocketsManager {
           status: false,
           code: 499,
           data: "Устройство не подключенно.",
-          yandex_error_code: "DEVICE_OFF"
+          yandex_error_code: "DEVICE_OFF",
+          deviceId: deviceId
         });
       }, 5000);
 
@@ -105,7 +107,8 @@ class WebSocketsManager {
           return {
             status: false,
             code: 408,
-            data: "Истекло время ожидания, попробуйте снова."
+            data: "Истекло время ожидания, попробуйте снова.",
+            deviceId: deviceWS.deviceId
           };
         }
 
@@ -116,14 +119,16 @@ class WebSocketsManager {
           response.resolve ({
             status: true,
             code: 200,
-            data: data.data
+            data: data.data,
+            deviceId: deviceWS.deviceId
           });
         } else {
           response.relove({
             status: false,
             code: 409,
             data: "Ошибка устройства, попробуйте снова.",
-            yandex_error_code: "INTERNAL_ERROR"
+            yandex_error_code: "INTERNAL_ERROR",
+            deviceId: deviceWS.deviceId
           });
         }
       } else {
@@ -135,7 +140,8 @@ class WebSocketsManager {
         code: 500,
         data: "Ошибка на сервере, попробуйте снова. ",
         error: error,
-        yandex_error_code: "INTERNAL_ERROR"
+        yandex_error_code: "INTERNAL_ERROR",
+        deviceId: deviceWS.deviceId
       }
     }
 

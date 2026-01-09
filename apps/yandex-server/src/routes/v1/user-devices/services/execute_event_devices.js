@@ -9,7 +9,7 @@ const executeEventDevices = async (devicesArray) => {
     throw new appError("empty_user_devices", 400);
   }
 
-  const responseArray = [];
+  const requeryArray = [];
 
   devicesArray.map( async (deviceObj) => {
     const deviceId = deviceObj.id;
@@ -21,7 +21,7 @@ const executeEventDevices = async (devicesArray) => {
       }
     });
 
-    responseArray.push({
+    requeryArray.push({
       deviceId: deviceId,
       data: {
         type: "yandex-commands",
@@ -30,13 +30,13 @@ const executeEventDevices = async (devicesArray) => {
     });
   });
 
-  let response = await axios.post("https://api.ai-firefly.ru/v1/devices/action", responseArray);
+  let response = await axios.post("https://api.ai-firefly.ru/v1/devices/action", requeryArray);
   response = response.data;
 
   if (!response.status) {
     throw new appError(response.data, response.code);
   }
-
+  
   const executedEventsDevices = response.data;
 
   executedEventsDevices.forEach((eventResult, index) => {
@@ -50,7 +50,16 @@ const executeEventDevices = async (devicesArray) => {
     }
 
     devicesArray[index].capabilities.forEach(capability => {
-      capability.state.action_result = actionResultObj;
+      const specialCommandObj = eventResult.specialCommandsResultArray.find((commandObj) => commandObj.instance === capability.state.instance);
+      if (specialCommandObj) {
+        capability.state.action_result = {
+          status: "ERROR",
+          error_code: "INTERNAL_ERROR",
+          error_message: specialCommandObj.data
+        }
+      } else {
+        capability.state.action_result = actionResultObj;
+      }
     });
   });
 

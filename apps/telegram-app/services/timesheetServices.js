@@ -77,7 +77,7 @@ export async function editTimesheet(event, tgUserName, dataObj) { //Редакт
       };
     }
 
-    axios.post("https://api.ai-firefly.ru/v1/update-timesheet",
+    axios.post("https://api.ai-firefly.ru/v1/devices/update-timesheet",
       {
         userName: tgUserName
       },
