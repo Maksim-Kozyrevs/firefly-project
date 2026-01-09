@@ -66,7 +66,7 @@ router.post("/action", asyncAPI(async (req, res) => {
       const commandsObjArray = device.data.commands;
       
       //Обработка специальных instance
-      const specialCommandsArray = commandsObjArray.filter(commandObj => commandObj.instance == "mode");
+      const specialCommandsArray = commandsObjArray.filter(commandObj => commandObj.instance == "program");
       const specialCommandsErrors = (await Promise.all(specialCommandsArray.map(async (commandObj) => {
         
         try {
