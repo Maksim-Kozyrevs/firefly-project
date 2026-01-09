@@ -1,4 +1,5 @@
 import pool from "@project/main-db";
+import appError from "@project/errors";
 import { WSManager } from "@project/web-sockets";
 
 
