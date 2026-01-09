@@ -63,9 +63,7 @@ router.post("/action", asyncAPI(async (req, res) => {
 
   const executedEventsDevices = await Promise.all(
     devicesArray.map(async (device) => {
-      const commandsObjArray = device.data;
-
-      console.log(JSON.stringify(device));
+      const commandsObjArray = device.data.commands;
       
       //Обработка специальных instance
       const specialCommandsResultArray = await commandsObjArray.map(async (commandObj) => {
