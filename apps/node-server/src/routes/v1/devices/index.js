@@ -66,28 +66,29 @@ router.post("/action", asyncAPI(async (req, res) => {
       const commandsObjArray = device.data.commands;
       
       //Обработка специальных instance
-      const specialCommandsResultArray = await Promise.all(commandsObjArray.map(async (commandObj) => {
+      const specialCommandsArray = commandsObjArray.filter(commandObj => commandObj.instance == "mode");
+      const specialCommandsErrors = await Promise.all(specialCommandsArray.map(async (commandObj) => {
         
         try {
-          if (commandObj.instance == "program") {
-            throw new appError("Test error", 499);
-            const response = await assignMode(device.deviceId, commandObj.value);
-          }
+          await assignMode(device.deviceId, commandObj.value);
+          return null;
         } catch (error) {
+          const errorCodeMap = {
+            404: "DEVICE_NOT_FOUND"
+          };
+
           return {
             status: false,
             instance: commandObj.instance,
-            data: error.message
+            error_code: errorCodeMap[error.statusCode] || "INTERNAL_ERROR",
+            error_message: error.message       
           }
         }
 
-      }));
-
-      console.log(JSON.stringify(specialCommandsResultArray));
-
+      })).filter(Boolean);
 
       let response = await WSManager.sendData(device.deviceId, device.data);
-      response.specialCommandsResultArray = specialCommandsResultArray;
+      response.specialCommandsErrors = specialCommandsErrors;
 
       return response;
     })

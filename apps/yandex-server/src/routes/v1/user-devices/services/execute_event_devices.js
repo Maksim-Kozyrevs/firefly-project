@@ -50,12 +50,12 @@ const executeEventDevices = async (devicesArray) => {
     }
 
     devicesArray[index].capabilities.forEach(capability => {
-      const specialCommandObj = eventResult.specialCommandsResultArray.find((commandObj) => commandObj.instance === capability.state.instance);
+      const specialCommandObj = eventResult.specialCommandsError.find((commandObj) => commandObj.instance === capability.state.instance);
       if (specialCommandObj) {
         capability.state.action_result = {
           status: "ERROR",
-          error_code: "INTERNAL_ERROR",
-          error_message: specialCommandObj.data
+          error_code: specialCommandObj.error_code || "INTERNAL_ERROR",
+          error_message: specialCommandObj.data || "Ошибка на сервере, попробуйте снова."
         }
       } else {
         capability.state.action_result = actionResultObj;
