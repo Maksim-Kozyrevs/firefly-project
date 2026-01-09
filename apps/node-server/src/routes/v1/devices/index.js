@@ -69,7 +69,7 @@ router.post("/action", asyncAPI(async (req, res) => {
       const specialCommandsResultArray = await commandsObjArray.map(async (commandObj) => {
         
         try {
-          if (commandObj.instance == "mode") {
+          if (commandObj.instance == "program") {
             const response = await assignMode(device.deviceId, commandObj.value);
           }
         } catch (error) {
