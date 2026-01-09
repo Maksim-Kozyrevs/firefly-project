@@ -83,6 +83,8 @@ router.post("/action", asyncAPI(async (req, res) => {
 
       });
 
+      console.log(JSON.stringify(specialCommandsResultArray));
+
 
       let response = await WSManager.sendData(device.deviceId, device.data);
       response.specialCommandsResultArray = specialCommandsResultArray;
