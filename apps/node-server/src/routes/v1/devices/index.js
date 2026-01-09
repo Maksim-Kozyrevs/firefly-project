@@ -70,6 +70,7 @@ router.post("/action", asyncAPI(async (req, res) => {
         
         try {
           if (commandObj.instance == "program") {
+            throw new appError("Test error", 499);
             const response = await assignMode(device.deviceId, commandObj.value);
           }
         } catch (error) {
