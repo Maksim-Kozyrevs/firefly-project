@@ -67,7 +67,7 @@ router.post("/action", asyncAPI(async (req, res) => {
       
       //Обработка специальных instance
       const specialCommandsArray = commandsObjArray.filter(commandObj => commandObj.instance == "mode");
-      const specialCommandsErrors = await Promise.all(specialCommandsArray.map(async (commandObj) => {
+      const specialCommandsErrors = (await Promise.all(specialCommandsArray.map(async (commandObj) => {
         
         try {
           await assignMode(device.deviceId, commandObj.value);
@@ -85,7 +85,7 @@ router.post("/action", asyncAPI(async (req, res) => {
           }
         }
 
-      })).filter(Boolean);
+      }))).filter(Boolean);
 
       let response = await WSManager.sendData(device.deviceId, device.data);
       response.specialCommandsErrors = specialCommandsErrors;
