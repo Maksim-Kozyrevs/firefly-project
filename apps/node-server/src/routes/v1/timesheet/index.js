@@ -7,29 +7,22 @@ const router = express.Router();
 
 
 
-router.all("/get-timesheet", async (req, res) => {
+import { asyncAPI } from "@project/middlewares";
+import appError from "@project/errors";
 
-  try {
-    const chipId = req.query.chipid;
+router.all("/get-timesheet", asyncAPI(async (req, res) => {
 
-    if (!chipId) {
-      res.status(400).json({
-        status: false,
-        data: "ChipId is empty.",
-      });
-      return;
-    }
+  const chipId = req.query.chipid;
 
-    const response = await getTimesheet(chipId);
-
-    res.json(response);
-  } catch (error) {
-    res.status(500).json({
-      status: false
-    });
+  if (!chipId) {
+    throw new appError("ChipId is empty.", 400);
   }
 
-});
+  const response = await getTimesheet(chipId);
+
+  res.json(response);
+
+}));
 
 
 

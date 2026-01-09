@@ -5,23 +5,23 @@ import { WSManager } from '@project/web-sockets';
 
 
 
+import { asyncAPI } from "@project/middlewares";
+import appError from "@project/errors";
+
 const router = express.Router();
 
 
 
-router.all("/command", express.json(), async (req, res) => {
+router.all("/command", express.json(), asyncAPI(async (req, res) => {
 
   const command = req.body.command;
   const userName = req.body.userName;
-  
+
   //Проверка привязки логина к Smart Dish
   const checkResponse = await checkTgLogin(userName);
 
   if (!checkResponse.status) {
-    res.status(404).json({
-      status: false
-    });
-    return;
+    throw new appError("User not found", 404);
   }
 
   WSManager.sendData(checkResponse.deviceId, {
@@ -33,74 +33,53 @@ router.all("/command", express.json(), async (req, res) => {
     status: true
   });
 
-});
+}));
 
-router.all("/update-timesheet", express.json(), async (req, res) => {
+router.all("/update-timesheet", express.json(), asyncAPI(async (req, res) => {
 
-  try {
-    const userName = req.body.userName;
+  const userName = req.body.userName;
 
-    const checkResponse = await checkTgLogin(userName);
+  const checkResponse = await checkTgLogin(userName);
 
-    if (!checkResponse.status) {
-      res.status(404).json({
-        status: false
-      });
-      return;
-    }
-
-    WSManager.sendData(checkResponse.deviceId, {
-      type: "update-timesheet"
-    });
-
-    res.json({
-      status: true
-    });
-  } catch (error) {
-    res.status(500).json({
-      status: false
-    });
+  if (!checkResponse.status) {
+    throw new appError("User not found", 404);
   }
 
-});
+  WSManager.sendData(checkResponse.deviceId, {
+    type: "update-timesheet"
+  });
 
-router.all("/devices/action", async (req, res) => {
+  res.json({
+    status: true
+  });
 
-  try {
-    const devicesArray = req.body;
+}));
 
-    if (!devicesArray) {
-      res.status(404).json({
-        status: false,
-        code: 400,
-        data: "devices_not_found"
-      });
-    }
+router.all("/devices/action", asyncAPI(async (req, res) => {
 
+  const devicesArray = req.body;
 
-    const executedEventsDevices = await Promise.all(
-      devicesArray.map(async (device) => {
-        let response = await WSManager.sendData(device.deviceId, device.data);
-        response.deviceId = device.deviceId;
-
-        return response;
-      })
-    );
-
-    res.json({
-      status: true,
-      code: 200,
-      data: executedEventsDevices
-    });
-  } catch (error) {
-    res.status(500).json({
-      status: false,
-      code: 500,
-      data: "server_error"
-    });
+  if (!devicesArray) {
+    throw new appError("devices_not_found", 400);
   }
 
-});
+
+  const executedEventsDevices = await Promise.all(
+    devicesArray.map(async (device) => {
+      let response = await WSManager.sendData(device.deviceId, device.data);
+      response.deviceId = device.deviceId;
+
+      return response;
+    })
+  );
+
+  res.json({
+    status: true,
+    code: 200,
+    data: executedEventsDevices
+  });
+
+}));
 
 
 

@@ -29,6 +29,22 @@ function startServer() {
     //Инициализация WS
     initWS(httpServer);
 
+    //Errors middleware
+    server.use((error, req, res, next) => {
+
+      const statusCode = error.statusCode || 500;
+      const data = error.message || "Ошибка на сервере, попробуйте снова.";
+
+      console.error(`Error:\n\r${error.stack}`);
+
+      res.status(statusCode).json({
+        status: error.status,
+        code: statusCode,
+        data: data,
+      });
+
+    });
+
     //Запуск сервера
     httpServer.listen(process.env.FIREFLY_SERVER_PORT, () => {
       console.log("Server is starting.");
