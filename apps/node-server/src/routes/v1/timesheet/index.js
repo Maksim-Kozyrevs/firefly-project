@@ -11,10 +11,10 @@ const router = express.Router();
 
 router.all("/get-timesheet", asyncAPI(async (req, res) => {
 
-  const chipId = req.query.chipid;
+  const chipId = req.query.device_id;
 
   if (!chipId) {
-    throw new appError("ChipId is empty.", 400);
+    throw new appError("Device_id is empty.", 400);
   }
 
   const response = await getTimesheet(chipId);
