@@ -20,10 +20,6 @@ router.all("/command", asyncAPI(async (req, res) => {
   //Проверка привязки логина к Smart Dish
   const checkResponse = await checkTgLogin(userName);
 
-  if (!checkResponse.status) {
-    throw new appError("User not found", 404);
-  }
-
   WSManager.sendData(checkResponse.deviceId, {
     type: "command",
     command: command
