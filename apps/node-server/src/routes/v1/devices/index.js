@@ -20,15 +20,15 @@ router.all("/command", asyncAPI(async (req, res) => {
   //Проверка привязки логина к Smart Dish
   const checkResponse = await checkTgLogin(userName);
 
-  WSManager.sendData(checkResponse.deviceId, {
+
+
+  const response = await WSManager.sendData(checkResponse.deviceId, {
     type: "command",
     command: command
   });
 
-  res.json({
-    status: true
-  });
-
+  res.statusCode(response.status).json(response);
+  
 }));
 
 router.all("/update-timesheet", express.json(), asyncAPI(async (req, res) => {
