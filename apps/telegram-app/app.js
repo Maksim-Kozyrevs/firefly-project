@@ -12,7 +12,7 @@ import { sendMenuTemplate, sendTimesheetTemplate } from "./services/messageTempl
 envConfig();
 
 const tgBotToken = process.env.TELEGRAM_DEVICES_BOT_TOCKEN;
-const commandApi = "https://api.ai-firefly.ru/v1/command";
+const commandApi = "https://api.ai-firefly.ru/v1/devices/command";
 
 
 
