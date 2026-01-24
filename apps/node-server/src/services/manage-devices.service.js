@@ -17,7 +17,8 @@ export async function checkTgLogin(userName) {
 
   return {
     status: true,
-    deviceId: response.rows[0].device_id
+    // deviceId: response.rows[0].device_id
+    deviceId: "3547f5dc-bc55-497e-834b-88dab0b2cd09"
   }
 
 }
