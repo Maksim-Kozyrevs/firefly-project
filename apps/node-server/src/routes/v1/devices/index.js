@@ -27,7 +27,7 @@ router.all("/command", asyncAPI(async (req, res) => {
     command: command
   });
 
-  res.status(response.status).json(response);
+  res.status(response.code).json(response);
   
 }));
 
